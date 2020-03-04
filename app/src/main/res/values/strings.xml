@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FirebaseOC</string>
+    <string name="app_name">Gestion des plannings</string>
     <string name="main_activity_description">Discute avec tes mentors, tout simplement.</string>
 
     <string name="login">Connexion</string>
