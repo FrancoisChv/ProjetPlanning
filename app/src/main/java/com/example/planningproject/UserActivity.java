@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class UserActivity extends AppCompatActivity {
 
-    Button btnLogOut;
+    Button btnLogOut, btnGoApp;
     Vibrator vib;
     FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -23,14 +23,27 @@ public class UserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user);
 
         vib=(Vibrator)getSystemService(MainActivity.VIBRATOR_SERVICE);
-        btnLogOut = (Button) findViewById(R.id.btnLogOut);
-        btnLogOut.setOnClickListener(new View.OnClickListener() {
+       // btnLogOut = (Button) findViewById(R.id.btnLogOut);
+        btnGoApp = (Button) findViewById(R.id.btnGoApp);
+      /*  btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 vib.vibrate(10);
                 FirebaseAuth.getInstance().signOut();
                 Intent I = new Intent(UserActivity.this, LoginActivity.class);
+                startActivity(I);
+
+            }
+        }); */
+
+        btnGoApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                vib.vibrate(10);
+                FirebaseAuth.getInstance().signOut();
+                Intent I = new Intent(UserActivity.this, ListItemsActivity.class);
                 startActivity(I);
 
             }
