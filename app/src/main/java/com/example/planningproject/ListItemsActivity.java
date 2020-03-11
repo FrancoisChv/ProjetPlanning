@@ -1,26 +1,14 @@
 package com.example.planningproject;
 
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,9 +16,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 
 public class ListItemsActivity extends AppCompatActivity {
 
@@ -48,23 +33,14 @@ public class ListItemsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_items);
 
         mDB= FirebaseDatabase.getInstance().getReference();
-        mListItemRef = mDB.child("listItem");
+        mListItemRef = mDB.child("1fvb_V3xjrGD24-k2V3TAQJznydc9qQLjSzvt-kQGodg/etudiants");
         myListItems = new ArrayList<>();
         mListItemsRecyclerView = (RecyclerView)findViewById(R.id.listItem_recycler_view);
         mListItemsRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(getResources()));
         mListItemsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         updateUI();
 
-      //  Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-      //  setSupportActionBar(toolbar);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createNewListItem();
-            }
-        });
-
+        /* Permet l'affichage A GARDER */
         mListItemRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -95,69 +71,6 @@ public class ListItemsActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        switch(id){
-            case R.id.action_delete_all:
-                deleteAllListItems();
-                break;
-            case R.id.action_logout:
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(this, LoginActivity.class));
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void createNewListItem() {
-        // Create new List Item  at /listItem
-        final String key = FirebaseDatabase.getInstance().getReference().child("listItem").push().getKey();
-        LayoutInflater li = LayoutInflater.from(this);
-        View getListItemView = li.inflate(R.layout.dialog_get_list_item, null);
-
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setView(getListItemView);
-
-        final EditText userInput = (EditText) getListItemView.findViewById(R.id.editTextDialogUserInput);
-
-        // set dialog message
-        alertDialogBuilder
-                .setCancelable(false)
-                .setPositiveButton("OK",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        // get user input and set it to result
-                        // edit text
-                        String listItemText = userInput.getText().toString();
-                        ListItem listItem = new ListItem(listItemText);
-                        Map<String, Object> listItemValues = listItem.toMap();
-                        Map<String, Object> childUpdates = new HashMap<>();
-                        childUpdates.put("/listItem/" + key, listItemValues);
-                        FirebaseDatabase.getInstance().getReference().updateChildren(childUpdates);
-
-                    }
-                }).create()
-                .show();
-
-    }
-
-    public void deleteAllListItems(){
-        FirebaseDatabase.getInstance().getReference().child("listItem").removeValue();
-        myListItems.clear();
-        mAdapter.notifyDataSetChanged();
-        Toast.makeText(this,"Element supprimé avec succès !",Toast.LENGTH_SHORT).show();
-    }
-
     private void fetchData(DataSnapshot dataSnapshot) {
         ListItem listItem=dataSnapshot.getValue(ListItem.class);
         myListItems.add(listItem);
@@ -177,7 +90,12 @@ public class ListItemsActivity extends AppCompatActivity {
         }
 
         public void bindData(ListItem s){
-            mNameTextView.setText(s.getListItemText());
+            String test = s.getNumero_Etudiant() +
+                    "\n" + s.getNom_Etudiant() +
+                    "\n" + s.getPrenom_Etudiant() +
+                    "\n" + s.getNiveau_Etudiant() +
+                    "\n" + s.getId_Groupe();
+            mNameTextView.setText(test);
         }
     }
     private class ListItemsAdapter extends RecyclerView.Adapter<ListItemsHolder>{

@@ -1,56 +1,72 @@
 package com.example.planningproject;
 
-import com.google.firebase.database.Exclude;
-import com.google.firebase.database.IgnoreExtraProperties;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
-@IgnoreExtraProperties
 public class ListItem {
 
-    public String listItemText;
-    public String listItemCreationDate;
+    private String Numero_Etudiant;
+    private String Nom_Etudiant;
+    private String Prenom_Etudiant;
+    private String Niveau_Etudiant;
+    private String Id_Groupe;
 
-    public String getListItemText() {
-        return listItemText;
+    public String getNumero_Etudiant() {
+        return Numero_Etudiant;
     }
 
-    public void setListItemText(String listItemText) {
-        this.listItemText = listItemText;
+    public void setNumero_Etudiant(String numero_Etudiant) {
+        Numero_Etudiant = numero_Etudiant;
     }
 
-    public void setListItemCreationDate(String listItemCreationDate) {
-        this.listItemCreationDate = listItemCreationDate;
+    public String getNom_Etudiant() {
+        return Nom_Etudiant;
+    }
+
+    public void setNom_Etudiant(String nom_Etudiant) {
+        Nom_Etudiant = nom_Etudiant;
+    }
+
+    public String getPrenom_Etudiant() {
+        return Prenom_Etudiant;
+    }
+
+    public void setPrenom_Etudiant(String prenom_Etudiant) {
+        Prenom_Etudiant = prenom_Etudiant;
+    }
+
+    public String getNiveau_Etudiant() {
+        return Niveau_Etudiant;
+    }
+
+    public void setNiveau_Etudiant(String niveau_Etudiant) {
+        Niveau_Etudiant = niveau_Etudiant;
+    }
+
+    public String getId_Groupe() {
+        return Id_Groupe;
+    }
+
+    public ListItem() {
+
+    }
+
+    public ListItem(String numero_Etudiant, String nom_Etudiant, String prenom_Etudiant, String niveau_Etudiant) {
+        Numero_Etudiant = numero_Etudiant;
+        Nom_Etudiant = nom_Etudiant;
+        Prenom_Etudiant = prenom_Etudiant;
+        Niveau_Etudiant = niveau_Etudiant;
+    }
+
+    public void setId_Groupe(String id_Groupe) {
+        Id_Groupe = id_Groupe;
     }
 
     @Override
     public String toString() {
-        return this.listItemText +"\n" + this.listItemCreationDate;
+        return "ListItem{" +
+                "Numero_Etudiant='" + Numero_Etudiant + '\'' +
+                ", Nom_Etudiant='" + Nom_Etudiant + '\'' +
+                ", Prenom_Etudiant='" + Prenom_Etudiant + '\'' +
+                ", Niveau_Etudiant='" + Niveau_Etudiant + '\'' +
+                ", Id_Groupe='" + Id_Groupe + '\'' +
+                '}';
     }
-
-    public String getListItemCreationDate() {
-        return listItemCreationDate;
-    }
-
-    public ListItem() {
-        // Default constructor required for calls to DataSnapshot.getValue(ListItem.class)
-    }
-
-    public ListItem(String listItemText) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-        this.listItemCreationDate = sdf.format(new Date());
-        this.listItemText = listItemText;
-    }
-
-    @Exclude
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("listItemText", listItemText);
-        result.put("listItemCreationDate", listItemCreationDate);
-        return result;
-    }
-
 }
