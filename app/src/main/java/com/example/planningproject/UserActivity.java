@@ -43,7 +43,7 @@ public class UserActivity extends AppCompatActivity {
 
                 vib.vibrate(10);
                 FirebaseAuth.getInstance().signOut();
-                Intent I = new Intent(UserActivity.this, ListItemsActivity.class);
+                Intent I = new Intent(UserActivity.this, ListEtudiantsActivity.class);
                 startActivity(I);
 
             }

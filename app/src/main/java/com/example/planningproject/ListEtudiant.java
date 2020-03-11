@@ -1,6 +1,6 @@
 package com.example.planningproject;
 
-public class ListItem {
+public class ListEtudiant {
 
     private String Numero_Etudiant;
     private String Nom_Etudiant;
@@ -44,11 +44,11 @@ public class ListItem {
         return Id_Groupe;
     }
 
-    public ListItem() {
+    public ListEtudiant() {
 
     }
 
-    public ListItem(String numero_Etudiant, String nom_Etudiant, String prenom_Etudiant, String niveau_Etudiant) {
+    public ListEtudiant(String numero_Etudiant, String nom_Etudiant, String prenom_Etudiant, String niveau_Etudiant) {
         Numero_Etudiant = numero_Etudiant;
         Nom_Etudiant = nom_Etudiant;
         Prenom_Etudiant = prenom_Etudiant;

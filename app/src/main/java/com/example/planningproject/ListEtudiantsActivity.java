@@ -17,14 +17,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class ListItemsActivity extends AppCompatActivity {
+public class ListEtudiantsActivity extends AppCompatActivity {
 
     private final String TAG = "ListActivity";
     DatabaseReference mDB;
     DatabaseReference mListItemRef;
     private RecyclerView mListItemsRecyclerView;
     private ListItemsAdapter mAdapter;
-    private ArrayList<ListItem> myListItems;
+    private ArrayList<ListEtudiant> mMyListEtudiants;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class ListItemsActivity extends AppCompatActivity {
 
         mDB= FirebaseDatabase.getInstance().getReference();
         mListItemRef = mDB.child("1fvb_V3xjrGD24-k2V3TAQJznydc9qQLjSzvt-kQGodg/etudiants");
-        myListItems = new ArrayList<>();
+        mMyListEtudiants = new ArrayList<>();
         mListItemsRecyclerView = (RecyclerView)findViewById(R.id.listItem_recycler_view);
         mListItemsRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(getResources()));
         mListItemsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -44,24 +44,24 @@ public class ListItemsActivity extends AppCompatActivity {
         mListItemRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Log.d(TAG+"Added",dataSnapshot.getValue(ListItem.class).toString());
+                Log.d(TAG+"Added",dataSnapshot.getValue(ListEtudiant.class).toString());
                 fetchData(dataSnapshot);
 
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Log.d(TAG+"Changed",dataSnapshot.getValue(ListItem.class).toString());
+                Log.d(TAG+"Changed",dataSnapshot.getValue(ListEtudiant.class).toString());
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                Log.d(TAG+"Removed",dataSnapshot.getValue(ListItem.class).toString());
+                Log.d(TAG+"Removed",dataSnapshot.getValue(ListEtudiant.class).toString());
             }
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-                Log.d(TAG+"Moved",dataSnapshot.getValue(ListItem.class).toString());
+                Log.d(TAG+"Moved",dataSnapshot.getValue(ListEtudiant.class).toString());
             }
 
             @Override
@@ -72,13 +72,13 @@ public class ListItemsActivity extends AppCompatActivity {
     }
 
     private void fetchData(DataSnapshot dataSnapshot) {
-        ListItem listItem=dataSnapshot.getValue(ListItem.class);
-        myListItems.add(listItem);
+        ListEtudiant listEtudiant =dataSnapshot.getValue(ListEtudiant.class);
+        mMyListEtudiants.add(listEtudiant);
         updateUI();
     }
 
     private void updateUI(){
-        mAdapter = new ListItemsAdapter(myListItems);
+        mAdapter = new ListItemsAdapter(mMyListEtudiants);
         mListItemsRecyclerView.setAdapter(mAdapter);
     }
 
@@ -89,7 +89,7 @@ public class ListItemsActivity extends AppCompatActivity {
             mNameTextView = (TextView) itemView.findViewById(R.id.textview_name);
         }
 
-        public void bindData(ListItem s){
+        public void bindData(ListEtudiant s){
             String test = s.getNumero_Etudiant() +
                     "\n" + s.getNom_Etudiant() +
                     "\n" + s.getPrenom_Etudiant() +
@@ -99,25 +99,25 @@ public class ListItemsActivity extends AppCompatActivity {
         }
     }
     private class ListItemsAdapter extends RecyclerView.Adapter<ListItemsHolder>{
-        private ArrayList<ListItem> mListItems;
-        public ListItemsAdapter(ArrayList<ListItem> ListItems){
-            mListItems = ListItems;
+        private ArrayList<ListEtudiant> mListEtudiants;
+        public ListItemsAdapter(ArrayList<ListEtudiant> listEtudiants){
+            mListEtudiants = listEtudiants;
         }
         @Override
         public ListItemsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater layoutInflater = LayoutInflater.from(ListItemsActivity.this);
+            LayoutInflater layoutInflater = LayoutInflater.from(ListEtudiantsActivity.this);
             View view = layoutInflater.inflate(R.layout.category_list_item_1,parent,false);
             return new ListItemsHolder(view);
 
         }
         @Override
         public void onBindViewHolder(ListItemsHolder holder, int position) {
-            ListItem s = mListItems.get(position);
+            ListEtudiant s = mListEtudiants.get(position);
             holder.bindData(s);
         }
         @Override
         public int getItemCount() {
-            return mListItems.size();
+            return mListEtudiants.size();
         }
     }
 }

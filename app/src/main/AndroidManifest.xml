@@ -17,7 +17,7 @@
             android:name="firebase_performance_logcat_enabled"
             android:value="true" />
 
-        <activity android:name=".ListItemsActivity" />
+        <activity android:name=".ListEtudiantsActivity" />
         <activity android:name=".UserActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity">
