@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class UserActivity extends AppCompatActivity {
 
-    Button btnLogOut, btnGoApp;
+    Button btnGoListActivites, btnGoListEtudiants, btnGoListGroupes;
     Vibrator vib;
     FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -23,27 +23,41 @@ public class UserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user);
 
         vib=(Vibrator)getSystemService(MainActivity.VIBRATOR_SERVICE);
-       // btnLogOut = (Button) findViewById(R.id.btnLogOut);
-        btnGoApp = (Button) findViewById(R.id.btnGoApp);
-      /*  btnLogOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btnGoListActivites = (Button) findViewById(R.id.btnGoListActivites);
+        btnGoListEtudiants = (Button) findViewById(R.id.btnGoListEtudiants);
+        btnGoListGroupes = (Button) findViewById(R.id.btnGoListGroupes);
 
-                vib.vibrate(10);
-                FirebaseAuth.getInstance().signOut();
-                Intent I = new Intent(UserActivity.this, LoginActivity.class);
-                startActivity(I);
-
-            }
-        }); */
-
-        btnGoApp.setOnClickListener(new View.OnClickListener() {
+        btnGoListActivites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 vib.vibrate(10);
                 FirebaseAuth.getInstance().signOut();
                 Intent I = new Intent(UserActivity.this, ListActivitesActivity.class);
+                startActivity(I);
+
+            }
+        });
+
+        btnGoListEtudiants.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                vib.vibrate(10);
+                FirebaseAuth.getInstance().signOut();
+                Intent I = new Intent(UserActivity.this, ListEtudiantsActivity.class);
+                startActivity(I);
+
+            }
+        });
+
+        btnGoListGroupes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                vib.vibrate(10);
+                FirebaseAuth.getInstance().signOut();
+                Intent I = new Intent(UserActivity.this, ListGroupesActivity.class);
                 startActivity(I);
 
             }
