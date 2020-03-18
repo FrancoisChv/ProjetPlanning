@@ -12,20 +12,19 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class UserActivity extends AppCompatActivity {
 
-    Button btnGoListActivites, btnGoListEtudiants, btnGoListGroupes;
+    Button btnGoListActivites, btnGoListEtudiants, btnGoListGroupes, btnGoListCodes;
     Vibrator vib;
-    FirebaseAuth firebaseAuth;
-    private FirebaseAuth.AuthStateListener authStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
-        vib=(Vibrator)getSystemService(MainActivity.VIBRATOR_SERVICE);
+      //  vib=(Vibrator)getSystemService(MainActivity.VIBRATOR_SERVICE);
         btnGoListActivites = (Button) findViewById(R.id.btnGoListActivites);
         btnGoListEtudiants = (Button) findViewById(R.id.btnGoListEtudiants);
         btnGoListGroupes = (Button) findViewById(R.id.btnGoListGroupes);
+        btnGoListCodes = (Button) findViewById(R.id.btnGoListCodes);
 
         btnGoListActivites.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +57,17 @@ public class UserActivity extends AppCompatActivity {
                 vib.vibrate(10);
                 FirebaseAuth.getInstance().signOut();
                 Intent I = new Intent(UserActivity.this, ListGroupesActivity.class);
+                startActivity(I);
+
+            }
+        });
+
+        btnGoListCodes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                vib.vibrate(10);
+                Intent I = new Intent(UserActivity.this, ListCodeActivity.class);
                 startActivity(I);
 
             }

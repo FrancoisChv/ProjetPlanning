@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "129603025865",
+    "firebase_url": "https://planningproject-b6f2b.firebaseio.com",
+    "project_id": "planningproject-b6f2b",
+    "storage_bucket": "planningproject-b6f2b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129603025865:android:b815622af82b50c7d0c618",
+        "android_client_info": {
+          "package_name": "com.example.planningproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "129603025865-4ffsst3tpb04vadhvv2qfnr4tmcbdd7l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.planningproject",
+            "certificate_hash": "2a7675f8a4a82a8dfa80a82a44390db1729227c4"
+          }
+        },
+        {
+          "client_id": "129603025865-daecdv5sn34tl44oqnef0p0jo87g5t29.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGvxtjisX2Z1L4mvqowcVpuKp3RFAsWzo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "129603025865-daecdv5sn34tl44oqnef0p0jo87g5t29.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
