@@ -96,34 +96,6 @@ public class ListGroupesActivity extends AppCompatActivity {
         });
     }
 
-
-
-    /* public void createNewListItem() {
-        // Create new List Item  at /listItem
-        final String key = FirebaseDatabase.getInstance().getReference().child("1fvb_V3xjrGD24-k2V3TAQJznydc9qQLjSzvt-kQGodg/etudiants").push().getKey();
-        LayoutInflater li = LayoutInflater.from(this);
-        View getListItemView = li.inflate(R.layout.dialog_get_list_item, null);
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setView(getListItemView);
-        final EditText userInput = (EditText) getListItemView.findViewById(R.id.editTextDialogUserInput);
-        // set dialog message
-        alertDialogBuilder
-                .setCancelable(false)
-                .setPositiveButton("OK",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        // get user input and set it to result
-                        // edit text
-                        String listItemText = userInput.getText().toString();
-                        ListItem listItem = new ListItem(listItemText);
-                        Map<String, Object> listItemValues = listItem.toMap();
-                        Map<String, Object> childUpdates = new HashMap<>();
-                        childUpdates.put("/listEtudiant/" + key, listItemValues);
-                        FirebaseDatabase.getInstance().getReference().updateChildren(childUpdates);
-                    }
-                }).create()
-                .show();
-    }*/
-
     private void fetchData(DataSnapshot dataSnapshot) {
         ListGroupes listItem=dataSnapshot.getValue(ListGroupes.class);
         myListItems.add(listItem);

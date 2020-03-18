@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ListGroupesActivity"></activity>
+        <activity android:name=".ListCodeActivity"/>
+        <activity android:name=".ListGroupesActivity" />
         <activity android:name=".ListActivitesActivity" />
 
         <meta-data
@@ -20,15 +21,15 @@
             android:value="true" />
 
         <activity android:name=".ListEtudiantsActivity" />
-        <activity android:name=".ListCodeActivity" />
-        <activity android:name=".UserActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".UserActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LoginActivity"/>
+
     </application>
 
 </manifest>

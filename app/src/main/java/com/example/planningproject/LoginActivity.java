@@ -1,6 +1,5 @@
 package com.example.planningproject;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
@@ -19,15 +18,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        accessCode = findViewById(R.id.codeAcces);
+        accessCode = findViewById(R.id.acessCode);
         btnLogIn = findViewById(R.id.btnLogIn);
         vib=(Vibrator)getSystemService(UserActivity.VIBRATOR_SERVICE);
 
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent I = new Intent(LoginActivity.this, UserActivity.class);
-                startActivity(I);
+
                 vib.vibrate(10);
             }
         });

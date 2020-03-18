@@ -22,11 +22,11 @@
         android:src="@drawable/univ" />
 
     <EditText
-        android:id="@+id/codeAcces"
+        android:id="@+id/acessCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:hint="Saisir code d'accès"
+        android:hint="Ecrire ici code d'accès"
         android:inputType="textEmailAddress" />
 
     <Button
@@ -36,5 +36,4 @@
         android:layout_margin="15dp"
         android:text="Se connecter"
         android:textSize="25dp" />
-
 </LinearLayout>

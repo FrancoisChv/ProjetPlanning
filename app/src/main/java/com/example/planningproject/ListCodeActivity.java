@@ -19,12 +19,12 @@ import java.util.ArrayList;
 
 public class ListCodeActivity extends AppCompatActivity {
 
-    private final String TAG = "ListCode";
+    private final String TAG = "ListActivity";
     DatabaseReference mDB;
     DatabaseReference mListItemRef;
     private RecyclerView mListItemsRecyclerView;
     private ListItemsAdapter mAdapter;
-    private ArrayList<ListCode> mMyListCode;
+    private ArrayList<ListCode> mMyListCodes;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class ListCodeActivity extends AppCompatActivity {
 
         mDB= FirebaseDatabase.getInstance().getReference();
         mListItemRef = mDB.child("1fvb_V3xjrGD24-k2V3TAQJznydc9qQLjSzvt-kQGodg/codes");
-        mMyListCode = new ArrayList<>();
+        mMyListCodes = new ArrayList<>();
         mListItemsRecyclerView = (RecyclerView)findViewById(R.id.listItem_recycler_view);
         mListItemsRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(getResources()));
         mListItemsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -73,12 +73,12 @@ public class ListCodeActivity extends AppCompatActivity {
 
     private void fetchData(DataSnapshot dataSnapshot) {
         ListCode listCode =dataSnapshot.getValue(ListCode.class);
-        mMyListCode.add(listCode);
+        mMyListCodes.add(listCode);
         updateUI();
     }
 
     private void updateUI(){
-        mAdapter = new ListItemsAdapter(mMyListCode);
+        mAdapter = new ListItemsAdapter(mMyListCodes);
         mListItemsRecyclerView.setAdapter(mAdapter);
     }
 
@@ -114,7 +114,7 @@ public class ListCodeActivity extends AppCompatActivity {
         }
         @Override
         public int getItemCount() {
-            return mMyListCode.size();
+            return mMyListCodes.size();
         }
     }
 }
