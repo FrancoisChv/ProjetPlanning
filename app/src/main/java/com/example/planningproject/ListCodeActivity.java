@@ -1,5 +1,7 @@
 package com.example.planningproject;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,12 +27,23 @@ public class ListCodeActivity extends AppCompatActivity {
     private RecyclerView mListItemsRecyclerView;
     private ListItemsAdapter mAdapter;
     private ArrayList<ListCode> mMyListCodes;
+    private TextView codee;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_items);
+
+
+        Intent I = getIntent();
+        if (I.hasExtra("code")) {
+            String str1 = I.getStringExtra("code");
+            SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("1", str1);
+            editor.apply();
+        }
 
         mDB= FirebaseDatabase.getInstance().getReference();
         mListItemRef = mDB.child("1fvb_V3xjrGD24-k2V3TAQJznydc9qQLjSzvt-kQGodg/codes");
@@ -70,6 +83,9 @@ public class ListCodeActivity extends AppCompatActivity {
             }
         });
     }
+
+    SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+    String lecode = sharedPreferences.getString("1", "bonjour");
 
     private void fetchData(DataSnapshot dataSnapshot) {
         ListCode listCode =dataSnapshot.getValue(ListCode.class);
