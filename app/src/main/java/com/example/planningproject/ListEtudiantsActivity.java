@@ -1,5 +1,6 @@
 package com.example.planningproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,12 +26,18 @@ public class ListEtudiantsActivity extends AppCompatActivity {
     private RecyclerView mListItemsRecyclerView;
     private ListItemsAdapter mAdapter;
     private ArrayList<ListEtudiant> mMyListEtudiants;
+    private String IDgroupe;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_items);
+
+        Intent I = getIntent();
+        if (I.hasExtra("idGroupe")) {
+            IDgroupe = I.getStringExtra("idGroupe");
+        }
 
         mDB= FirebaseDatabase.getInstance().getReference();
         mListItemRef = mDB.child("1fvb_V3xjrGD24-k2V3TAQJznydc9qQLjSzvt-kQGodg/etudiants");
@@ -90,12 +97,15 @@ public class ListEtudiantsActivity extends AppCompatActivity {
         }
 
         public void bindData(ListEtudiant s){
-            String test = s.getNumero_Etudiant() +
-                    "\n" + s.getNom_Etudiant() +
-                    "\n" + s.getPrenom_Etudiant() +
-                    "\n" + s.getNiveau_Etudiant() +
-                    "\n" + s.getId_Groupe();
-            mNameTextView.setText(test);
+            if (s.getId_Groupe().equals(IDgroupe)) {
+                String test = s.getNumero_Etudiant() +
+                        "\n" + s.getNom_Etudiant() +
+                        "\n" + s.getPrenom_Etudiant() +
+                        "\n" + s.getNiveau_Etudiant() +
+                        "\n" + s.getId_Groupe();
+                mNameTextView.setText(test);
+            }
+
         }
     }
     private class ListItemsAdapter extends RecyclerView.Adapter<ListItemsHolder>{

@@ -43,6 +43,9 @@ public class UserActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent I = new Intent(UserActivity.this, ListEtudiantsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("idGroupe", idGroupe);
+                I.putExtras(bundle);
                 startActivity(I);
 
             }
