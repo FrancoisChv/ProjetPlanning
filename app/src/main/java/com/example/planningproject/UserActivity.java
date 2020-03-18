@@ -10,11 +10,18 @@ import androidx.appcompat.app.AppCompatActivity;
 public class UserActivity extends AppCompatActivity {
 
     Button btnGoListActivites, btnGoListEtudiants, btnGoListGroupes, btnGoListCodes;
+    private String idGroupe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+
+        Intent I = getIntent();
+        if (I.hasExtra("idGroupe")) {
+             idGroupe = I.getStringExtra("idGroupe");
+        }
+
 
         btnGoListActivites = (Button) findViewById(R.id.btnGoListActivites);
         btnGoListEtudiants = (Button) findViewById(R.id.btnGoListEtudiants);
@@ -46,6 +53,9 @@ public class UserActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent I = new Intent(UserActivity.this, ListGroupesActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("idGroupe", idGroupe);
+                I.putExtras(bundle);
                 startActivity(I);
 
             }

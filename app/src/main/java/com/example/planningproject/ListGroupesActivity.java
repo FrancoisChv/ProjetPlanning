@@ -41,12 +41,18 @@ public class ListGroupesActivity extends AppCompatActivity {
     private RecyclerView mListItemsRecyclerView;
     private ListItemsAdapter mAdapter;
     private ArrayList<ListGroupes> myListItems;
+    private String IDgroupe;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_etudiant);
+
+        Intent I = getIntent();
+        if (I.hasExtra("idGroupe")) {
+            IDgroupe = I.getStringExtra("idGroupe");
+        }
 
         mDB= FirebaseDatabase.getInstance().getReference();
         mListItemRef = mDB.child("1fvb_V3xjrGD24-k2V3TAQJznydc9qQLjSzvt-kQGodg/groupes");
@@ -115,8 +121,10 @@ public class ListGroupesActivity extends AppCompatActivity {
         }
 
         public void bindData(ListGroupes s){
-            String temp = s.getHoraires_Debut() + "\n" + s.getHoraires_Fin() + "\n" + s.getId_Groupe() + "\n" + s.getNom_Activite();
-            mNameTextView.setText(temp);
+            if (s.getId_Groupe().equals(IDgroupe)) {
+              String temp = s.getHoraires_Debut() + "\n" + s.getHoraires_Fin() + "\n" + s.getId_Groupe() + "\n" + s.getNom_Activite() ;
+              mNameTextView.setText(temp);
+            }
         }
     }
     private class ListItemsAdapter extends RecyclerView.Adapter<ListItemsHolder>{

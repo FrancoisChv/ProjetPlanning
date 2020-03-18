@@ -7,11 +7,20 @@ import java.util.Map;
 
 public class ListGroupes {
 
-    public ListGroupes(String id_Groupe, String nom_Activite, String horaires_Debut, String horaires_Fin) {
+    public ListGroupes(String id_Groupe, String nom_Activite, String horaires_Debut, String horaires_Fin, String numero) {
         Id_Groupe = id_Groupe;
         Nom_Activite = nom_Activite;
         Horaires_Debut = horaires_Debut;
         Horaires_Fin = horaires_Fin;
+        Numero = numero;
+    }
+
+    public String getNumero() {
+        return Numero;
+    }
+
+    public void setNumero(String numero) {
+        Numero = numero;
     }
 
     public String getId_Groupe() {
@@ -50,13 +59,15 @@ public class ListGroupes {
     private String Nom_Activite;
     private String Horaires_Debut;
     private String Horaires_Fin;
+    private String Numero;
 
     @Override
     public String toString() {
         return  this.Id_Groupe +"\n" +
                 this.Nom_Activite +"\n" +
                 this.Horaires_Debut + "\n" +
-                this.Horaires_Fin;
+                this.Horaires_Fin +  "\n" +
+                this.Numero;
     }
 
     public ListGroupes() {
@@ -70,9 +81,11 @@ public class ListGroupes {
         result.put("Nom_Activite", Nom_Activite);
         result.put("Horaires_Debut", Horaires_Debut);
         result.put("Horaires_Fin", Horaires_Fin);
+        result.put("Numéro", Numero);
 
         return result;
     }
+
 
 
 }

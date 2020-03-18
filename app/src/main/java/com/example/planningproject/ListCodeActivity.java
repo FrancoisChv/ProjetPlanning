@@ -27,22 +27,20 @@ public class ListCodeActivity extends AppCompatActivity {
     private RecyclerView mListItemsRecyclerView;
     private ListItemsAdapter mAdapter;
     private ArrayList<ListCode> mMyListCodes;
-    private TextView codee;
+    private String str1;
+    private TextView test;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_items);
+        test = findViewById(R.id.test);
 
 
         Intent I = getIntent();
         if (I.hasExtra("code")) {
-            String str1 = I.getStringExtra("code");
-            SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("1", str1);
-            editor.apply();
+            str1 = I.getStringExtra("code");
         }
 
         mDB= FirebaseDatabase.getInstance().getReference();
@@ -84,9 +82,6 @@ public class ListCodeActivity extends AppCompatActivity {
         });
     }
 
-    SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-    String lecode = sharedPreferences.getString("1", "bonjour");
-
     private void fetchData(DataSnapshot dataSnapshot) {
         ListCode listCode =dataSnapshot.getValue(ListCode.class);
         mMyListCodes.add(listCode);
@@ -99,6 +94,8 @@ public class ListCodeActivity extends AppCompatActivity {
     }
 
     private class ListItemsHolder extends RecyclerView.ViewHolder{
+
+
         public TextView mNameTextView;
         public ListItemsHolder(View itemView){
             super(itemView);
@@ -106,9 +103,16 @@ public class ListCodeActivity extends AppCompatActivity {
         }
 
         public void bindData(ListCode s){
-            String test = s.getCode_Acces() +
-                    "\n" + s.getId_Groupe();
-            mNameTextView.setText(test);
+            String result = "";
+            if (s.getCode_Acces().equals(str1)) {
+                String id_groupe = s.getId_Groupe();
+                Intent I = new Intent(ListCodeActivity.this, UserActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("idGroupe", id_groupe);
+                I.putExtras(bundle);
+                startActivity(I);
+            }
+            mNameTextView.setText(result);
         }
     }
     private class ListItemsAdapter extends RecyclerView.Adapter<ListItemsHolder>{
@@ -128,9 +132,11 @@ public class ListCodeActivity extends AppCompatActivity {
             ListCode s = mListCodes.get(position);
             holder.bindData(s);
         }
+
         @Override
         public int getItemCount() {
             return mMyListCodes.size();
         }
     }
+
 }
