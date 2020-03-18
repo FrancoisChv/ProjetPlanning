@@ -1,26 +1,14 @@
 package com.example.planningproject;
 
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,65 +16,52 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-
-public class ListGroupesActivity extends AppCompatActivity {
+public class ListCodeActivity extends AppCompatActivity {
 
     private final String TAG = "ListActivity";
     DatabaseReference mDB;
     DatabaseReference mListItemRef;
     private RecyclerView mListItemsRecyclerView;
     private ListItemsAdapter mAdapter;
-    private ArrayList<ListGroupes> myListItems;
+    private ArrayList<ListCode> mMyListCodes;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_etudiant);
+        setContentView(R.layout.activity_list_items);
 
         mDB= FirebaseDatabase.getInstance().getReference();
-        mListItemRef = mDB.child("1fvb_V3xjrGD24-k2V3TAQJznydc9qQLjSzvt-kQGodg/groupes");
-        myListItems = new ArrayList<>();
+        mListItemRef = mDB.child("1fvb_V3xjrGD24-k2V3TAQJznydc9qQLjSzvt-kQGodg/codes");
+        mMyListCodes = new ArrayList<>();
         mListItemsRecyclerView = (RecyclerView)findViewById(R.id.listItem_recycler_view);
         mListItemsRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(getResources()));
         mListItemsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         updateUI();
 
-        //  Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //  setSupportActionBar(toolbar);
-      /*  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createNewListItem();
-            }
-        }); */
-
+        /* Permet l'affichage A GARDER */
         mListItemRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Log.d(TAG+"Added",dataSnapshot.getValue(ListGroupes.class).toString());
+                Log.d(TAG+"Added",dataSnapshot.getValue(ListCode.class).toString());
                 fetchData(dataSnapshot);
 
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Log.d(TAG+"Changed",dataSnapshot.getValue(ListGroupes.class).toString());
+                Log.d(TAG+"Changed",dataSnapshot.getValue(ListCode.class).toString());
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                Log.d(TAG+"Removed",dataSnapshot.getValue(ListGroupes.class).toString());
+                Log.d(TAG+"Removed",dataSnapshot.getValue(ListCode.class).toString());
             }
 
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-                Log.d(TAG+"Moved",dataSnapshot.getValue(ListGroupes.class).toString());
+                Log.d(TAG+"Moved",dataSnapshot.getValue(ListCode.class).toString());
             }
 
             @Override
@@ -97,13 +72,13 @@ public class ListGroupesActivity extends AppCompatActivity {
     }
 
     private void fetchData(DataSnapshot dataSnapshot) {
-        ListGroupes listItem=dataSnapshot.getValue(ListGroupes.class);
-        myListItems.add(listItem);
+        ListCode listCode =dataSnapshot.getValue(ListCode.class);
+        mMyListCodes.add(listCode);
         updateUI();
     }
 
     private void updateUI(){
-        mAdapter = new ListItemsAdapter(myListItems);
+        mAdapter = new ListItemsAdapter(mMyListCodes);
         mListItemsRecyclerView.setAdapter(mAdapter);
     }
 
@@ -114,31 +89,32 @@ public class ListGroupesActivity extends AppCompatActivity {
             mNameTextView = (TextView) itemView.findViewById(R.id.textview_name);
         }
 
-        public void bindData(ListGroupes s){
-            String temp = s.getHoraires_Debut() + "\n" + s.getHoraires_Fin() + "\n" + s.getId_Groupe() + "\n" + s.getNom_Activite();
-            mNameTextView.setText(temp);
+        public void bindData(ListCode s){
+            String test = s.getCode_Acces() +
+                    "\n" + s.getId_Groupe();
+            mNameTextView.setText(test);
         }
     }
     private class ListItemsAdapter extends RecyclerView.Adapter<ListItemsHolder>{
-        private ArrayList<ListGroupes> mListItems;
-        public ListItemsAdapter(ArrayList<ListGroupes> ListItems){
-            mListItems = ListItems;
+        private ArrayList<ListCode> mListCodes;
+        public ListItemsAdapter(ArrayList<ListCode> listCodes){
+            mListCodes = listCodes;
         }
         @Override
         public ListItemsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater layoutInflater = LayoutInflater.from(ListGroupesActivity.this);
+            LayoutInflater layoutInflater = LayoutInflater.from(ListCodeActivity.this);
             View view = layoutInflater.inflate(R.layout.category_list_item_1,parent,false);
             return new ListItemsHolder(view);
 
         }
         @Override
         public void onBindViewHolder(ListItemsHolder holder, int position) {
-            ListGroupes s = mListItems.get(position);
+            ListCode s = mListCodes.get(position);
             holder.bindData(s);
         }
         @Override
         public int getItemCount() {
-            return mListItems.size();
+            return mMyListCodes.size();
         }
     }
 }
