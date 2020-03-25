@@ -26,7 +26,7 @@ public class ListEtudiantsActivity extends AppCompatActivity {
     private RecyclerView mListItemsRecyclerView;
     private ListItemsAdapter mAdapter;
     private ArrayList<ListEtudiant> mMyListEtudiants;
-    private String IDgroupe;
+    private String IDgroupe=null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,9 @@ public class ListEtudiantsActivity extends AppCompatActivity {
         Intent I = getIntent();
         if (I.hasExtra("idGroupe")) {
             IDgroupe = I.getStringExtra("idGroupe");
+            if(IDgroupe.length()==0) {
+                IDgroupe = "ADMIN";
+            }
         }
 
         mDB= FirebaseDatabase.getInstance().getReference();
@@ -98,6 +101,14 @@ public class ListEtudiantsActivity extends AppCompatActivity {
 
         public void bindData(ListEtudiant s){
             if (s.getId_Groupe().equals(IDgroupe)) {
+                String test = s.getNumero_Etudiant() +
+                        "\n" + s.getNom_Etudiant() +
+                        "\n" + s.getPrenom_Etudiant() +
+                        "\n" + s.getNiveau_Etudiant() +
+                        "\n" + s.getId_Groupe();
+                mNameTextView.setText(test);
+            }
+            if(IDgroupe.equals("ADMIN")) {
                 String test = s.getNumero_Etudiant() +
                         "\n" + s.getNom_Etudiant() +
                         "\n" + s.getPrenom_Etudiant() +
