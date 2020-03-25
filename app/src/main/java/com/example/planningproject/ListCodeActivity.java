@@ -1,7 +1,6 @@
 package com.example.planningproject;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,18 +37,16 @@ public class ListCodeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        setContentView(R.layout.activity_list_code);
-
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_list_items);
         test = findViewById(R.id.test);
+
 
         Intent I = getIntent();
         if (I.hasExtra("code")) {
             str1 = I.getStringExtra("code");
         }
-
 
         mDB= FirebaseDatabase.getInstance().getReference();
         mListItemRef = mDB.child("1fvb_V3xjrGD24-k2V3TAQJznydc9qQLjSzvt-kQGodg/codes");
@@ -59,7 +56,6 @@ public class ListCodeActivity extends AppCompatActivity {
         mListItemsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         updateUI();
 
-        /* Permet l'affichage A GARDER */
         mListItemRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -119,13 +115,20 @@ public class ListCodeActivity extends AppCompatActivity {
                 bundle.putString("idGroupe", id_groupe);
                 I.putExtras(bundle);
                 startActivity(I);
-            }
-            if (str1.equals("ADMIN")) {
+            } else if (str1.equals("ADMIN")) {
                 result = s.getId_Groupe() + "\n" + s.getCode_Acces();
                 Intent I = new Intent(ListCodeActivity.this, UserActivity.class);
                 startActivity(I);
+                mNameTextView.setText(result);
+            } else {
+                String access = "Refus";
+                Intent I = new Intent(ListCodeActivity.this, LoginActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("Resultat", access);
+                I.putExtras(bundle);
+                startActivity(I);
             }
-            mNameTextView.setText(result);
+
         }
     }
     private class ListItemsAdapter extends RecyclerView.Adapter<ListItemsHolder>{
