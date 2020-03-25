@@ -1,13 +1,12 @@
 package com.example.planningproject;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,15 +29,12 @@ public class ListCodeActivity extends AppCompatActivity {
     private ArrayList<ListCode> mMyListCodes;
     private String str1;
     private TextView test;
+    private Boolean trouve = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_list_items);
         test = findViewById(R.id.test);
 
@@ -56,6 +52,7 @@ public class ListCodeActivity extends AppCompatActivity {
         mListItemsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         updateUI();
 
+        /* Permet l'affichage A GARDER */
         mListItemRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -110,6 +107,7 @@ public class ListCodeActivity extends AppCompatActivity {
             String result = "";
             if (s.getCode_Acces().equals(str1)) {
                 String id_groupe = s.getId_Groupe();
+                trouve = true;
                 Intent I = new Intent(ListCodeActivity.this, UserActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("idGroupe", id_groupe);
@@ -120,7 +118,8 @@ public class ListCodeActivity extends AppCompatActivity {
                 Intent I = new Intent(ListCodeActivity.this, UserActivity.class);
                 startActivity(I);
                 mNameTextView.setText(result);
-            } else {
+            }
+            if (!trouve) {
                 String access = "Refus";
                 Intent I = new Intent(ListCodeActivity.this, LoginActivity.class);
                 Bundle bundle = new Bundle();
@@ -128,7 +127,6 @@ public class ListCodeActivity extends AppCompatActivity {
                 I.putExtras(bundle);
                 startActivity(I);
             }
-
         }
     }
     private class ListItemsAdapter extends RecyclerView.Adapter<ListItemsHolder>{
