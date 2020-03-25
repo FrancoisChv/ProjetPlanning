@@ -30,7 +30,6 @@ public class UserActivity extends AppCompatActivity {
         btnGoListActivites = (Button) findViewById(R.id.btnGoListActivites);
         btnGoListEtudiants = (Button) findViewById(R.id.btnGoListEtudiants);
         btnGoListGroupes = (Button) findViewById(R.id.btnGoListGroupes);
-        btnGoListCodes = (Button) findViewById(R.id.btnGoListCodes);
 
         btnGoListActivites.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,17 +66,5 @@ public class UserActivity extends AppCompatActivity {
 
             }
         });
-
-        btnGoListCodes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent I = new Intent(UserActivity.this, ListCodeActivity.class);
-                startActivity(I);
-
-            }
-        });
-
-
     }
 }
