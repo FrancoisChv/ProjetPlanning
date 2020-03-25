@@ -122,8 +122,11 @@ public class ListGroupesActivity extends AppCompatActivity {
 
         public void bindData(ListGroupes s){
             if (s.getId_Groupe().equals(IDgroupe)) {
-              String temp = s.getHoraires_Debut() + "\n" + s.getHoraires_Fin() + "\n" + s.getId_Groupe() + "\n" + s.getNom_Activite() ;
-              mNameTextView.setText(temp);
+                String temp = s.getHoraires_Debut() + "\n" + s.getHoraires_Fin() + "\n" + s.getId_Groupe() + "\n" + s.getNom_Activite() ;
+                mNameTextView.setText(temp);
+            } else {
+                String temp = s.getHoraires_Debut() + "\n" + s.getHoraires_Fin() + "\n" + s.getId_Groupe() + "\n" + s.getNom_Activite() ;
+                mNameTextView.setText(temp);
             }
         }
     }

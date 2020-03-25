@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class UserActivity extends AppCompatActivity {
@@ -20,6 +19,10 @@ public class UserActivity extends AppCompatActivity {
         Intent I = getIntent();
         if (I.hasExtra("idGroupe")) {
              idGroupe = I.getStringExtra("idGroupe");
+            if(!(idGroupe.equals("G0"))) {
+                btnGoListActivites.setEnabled(false);
+                btnGoListCodes.setEnabled(false);
+            }
         }
 
 

@@ -21,6 +21,15 @@
         android:layout_height="202dp"
         android:src="@drawable/univ" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Saisir ci-dessous le code qui vous a été envoyé par e-mail."
+        android:textAlignment="center"
+        android:layout_margin="15dp"
+        android:textSize="20dp"
+        android:gravity="center_horizontal" />
+
     <EditText
         android:id="@+id/acessCode"
         android:layout_width="match_parent"

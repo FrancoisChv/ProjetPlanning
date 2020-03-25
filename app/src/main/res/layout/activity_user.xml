@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_margin="15dp"
-            android:text="Accéder à la liste des étudiants" />
+            android:text="Accéder à la liste des étudiants de mon groupe" />
 
     </LinearLayout>
 
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_margin="15dp"
-            android:text="Accéder à la liste des groupes" />
+            android:text="Accéder à mon planning" />
 
     </LinearLayout>
 
@@ -92,5 +92,7 @@
             android:text="Accéder à la liste des codes" />
 
     </LinearLayout>
+
+
 
 </LinearLayout>
