@@ -108,27 +108,35 @@ public class ListCodeActivity extends AppCompatActivity {
 
         public void bindData(ListCode s){
             String result = "";
+            Boolean trouveGroupe=false;
+            Boolean trouveAdmin=false;
             if (s.getCode_Acces().equals(str1)) {
+                trouveGroupe = true;
+
+            } else if (str1.equals("ADMIN")) {
+                trouveAdmin=true;
+
+            }
+            
+            if (trouveGroupe == true) {
                 String id_groupe = s.getId_Groupe();
                 Intent I = new Intent(ListCodeActivity.this, UserActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("idGroupe", id_groupe);
                 I.putExtras(bundle);
                 startActivity(I);
-            } else if (str1.equals("ADMIN")) {
+            } else if (trouveAdmin == true) {
                 result = s.getId_Groupe() + "\n" + s.getCode_Acces();
                 Intent I = new Intent(ListCodeActivity.this, UserActivity.class);
                 startActivity(I);
                 mNameTextView.setText(result);
-            } else {
-                String access = "Refus";
-                Intent I = new Intent(ListCodeActivity.this, LoginActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("Resultat", access);
-                I.putExtras(bundle);
-                startActivity(I);
             }
-
+            String access = "Refus";
+            Intent I = new Intent(ListCodeActivity.this, LoginActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("Resultat", access);
+            I.putExtras(bundle);
+            startActivity(I);
         }
     }
     private class ListItemsAdapter extends RecyclerView.Adapter<ListItemsHolder>{
