@@ -119,13 +119,20 @@ public class ListCodeActivity extends AppCompatActivity {
                 bundle.putString("idGroupe", id_groupe);
                 I.putExtras(bundle);
                 startActivity(I);
-            }
-            if (str1.equals("ADMIN")) {
+            } else if (str1.equals("ADMIN")) {
                 result = s.getId_Groupe() + "\n" + s.getCode_Acces();
                 Intent I = new Intent(ListCodeActivity.this, UserActivity.class);
                 startActivity(I);
+                mNameTextView.setText(result);
+            } else {
+                String access = "Refus";
+                Intent I = new Intent(ListCodeActivity.this, LoginActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("Resultat", access);
+                I.putExtras(bundle);
+                startActivity(I);
             }
-            mNameTextView.setText(result);
+
         }
     }
     private class ListItemsAdapter extends RecyclerView.Adapter<ListItemsHolder>{
