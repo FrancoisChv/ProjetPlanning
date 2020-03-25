@@ -45,14 +45,4 @@
         android:layout_margin="15dp"
         android:text="Se connecter"
         android:textSize="25dp" />
-
-    <TextView
-        android:id="@+id/resultlogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textAlignment="center"
-        android:layout_margin="15dp"
-        android:textSize="20dp"
-        android:gravity="center_horizontal" />
 </LinearLayout>
