@@ -16,14 +16,15 @@ public class UserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
+        idGroupe = "";
         Intent I = getIntent();
         if (I.hasExtra("idGroupe")) {
              idGroupe = I.getStringExtra("idGroupe");
-            if(!(idGroupe.equals("G0"))) {
-                btnGoListActivites.setEnabled(false);
-                btnGoListCodes.setEnabled(false);
-            }
+        } else {
+            idGroupe = "ADMIN";
         }
+
+
 
 
         btnGoListActivites = (Button) findViewById(R.id.btnGoListActivites);

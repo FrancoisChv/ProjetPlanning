@@ -124,7 +124,8 @@ public class ListGroupesActivity extends AppCompatActivity {
             if (s.getId_Groupe().equals(IDgroupe)) {
                 String temp = s.getHoraires_Debut() + "\n" + s.getHoraires_Fin() + "\n" + s.getId_Groupe() + "\n" + s.getNom_Activite() ;
                 mNameTextView.setText(temp);
-            } else {
+            }
+            if (IDgroupe.equals("ADMIN")) {
                 String temp = s.getHoraires_Debut() + "\n" + s.getHoraires_Fin() + "\n" + s.getId_Groupe() + "\n" + s.getNom_Activite() ;
                 mNameTextView.setText(temp);
             }

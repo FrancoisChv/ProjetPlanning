@@ -104,15 +104,7 @@ public class ListEtudiantsActivity extends AppCompatActivity {
                         "\n" + s.getNiveau_Etudiant() +
                         "\n" + s.getId_Groupe();
                 mNameTextView.setText(test);
-            } else {
-                String test = s.getNumero_Etudiant() +
-                        "\n" + s.getNom_Etudiant() +
-                        "\n" + s.getPrenom_Etudiant() +
-                        "\n" + s.getNiveau_Etudiant() +
-                        "\n" + s.getId_Groupe();
-                mNameTextView.setText(test);
             }
-
         }
     }
     private class ListItemsAdapter extends RecyclerView.Adapter<ListItemsHolder>{
