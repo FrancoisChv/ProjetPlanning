@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class UserActivity extends AppCompatActivity {
 
-    Button btnGoListActivites, btnGoListEtudiants, btnGoListGroupes, btnGoListCodes;
+    Button btnGoListActivites, btnGoListEtudiants, btnGoListGroupes;
     private String idGroupe;
 
     @Override
@@ -19,17 +19,11 @@ public class UserActivity extends AppCompatActivity {
         Intent I = getIntent();
         if (I.hasExtra("idGroupe")) {
              idGroupe = I.getStringExtra("idGroupe");
-            if(!(idGroupe.equals("G0"))) {
-                btnGoListActivites.setEnabled(false);
-                btnGoListCodes.setEnabled(false);
-            }
         }
-
-
+        
         btnGoListActivites = (Button) findViewById(R.id.btnGoListActivites);
         btnGoListEtudiants = (Button) findViewById(R.id.btnGoListEtudiants);
         btnGoListGroupes = (Button) findViewById(R.id.btnGoListGroupes);
-        btnGoListCodes = (Button) findViewById(R.id.btnGoListCodes);
 
         btnGoListActivites.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,17 +60,5 @@ public class UserActivity extends AppCompatActivity {
 
             }
         });
-
-        btnGoListCodes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent I = new Intent(UserActivity.this, ListCodeActivity.class);
-                startActivity(I);
-
-            }
-        });
-
-
     }
 }
