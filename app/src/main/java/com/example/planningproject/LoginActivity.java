@@ -24,20 +24,17 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-
-        accessCode = findViewById(R.id.acessCode);
-        btnLogIn = findViewById(R.id.btnLogIn);
-        log = findViewById(R.id.resultlogin);
-        vib=(Vibrator)getSystemService(UserActivity.VIBRATOR_SERVICE);
-
+        
         Intent I = getIntent();
         if (I.hasExtra("Resultat")) {
            log.setText("Code d'accès incorrect !");
            log.setTextColor(Color.parseColor("#ee1010"));
         }
 
-
+        accessCode = findViewById(R.id.acessCode);
+        btnLogIn = findViewById(R.id.btnLogIn);
+        log = findViewById(R.id.resultlogin);
+        vib=(Vibrator)getSystemService(UserActivity.VIBRATOR_SERVICE);
 
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
