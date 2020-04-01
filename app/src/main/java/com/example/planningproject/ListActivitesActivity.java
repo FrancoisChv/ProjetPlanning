@@ -1,13 +1,10 @@
 package com.example.planningproject;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,11 +30,7 @@ public class ListActivitesActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_list_activite);
+        setContentView(R.layout.activity_list_items);
 
         mDB= FirebaseDatabase.getInstance().getReference();
         mListItemRef = mDB.child("1fvb_V3xjrGD24-k2V3TAQJznydc9qQLjSzvt-kQGodg/activites");
@@ -47,7 +40,7 @@ public class ListActivitesActivity extends AppCompatActivity {
         mListItemsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         updateUI();
 
-        /* Permet l'affichage A GARDER */
+// Permet l'affichage A GARDER
         mListItemRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
