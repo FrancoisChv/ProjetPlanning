@@ -13,14 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ListCodeActivity"/>
-        <activity android:name=".ListGroupesActivity" />
-        <activity android:name=".ListActivitesActivity" />
+        <activity android:name=".ListGroupeActivity" />
+        <activity android:name=".ListActiviteActivity" />
 
         <meta-data
             android:name="firebase_performance_logcat_enabled"
             android:value="true" />
 
-        <activity android:name=".ListEtudiantsActivity" />
+        <activity android:name=".ListEtudiantActivity" />
         <activity android:name=".UserActivity"/>
         <activity android:name=".LoginActivity">
         <intent-filter>
